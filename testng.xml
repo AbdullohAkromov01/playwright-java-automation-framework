@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="PlaywrightSuite">
+
+    <test name="Automation Tests">
+
+        <classes>
+            <class name="tests.LoginTests"/>
+            <class name="tests.E2ETests"/>
+        </classes>
+
+    </test>
+
+</suite>
