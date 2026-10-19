@@ -1,10 +1,17 @@
 package base;
 
 import com.microsoft.playwright.*;
+import io.qameta.allure.Allure;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.nio.file.Paths;
 
 public class BaseTest {
 
@@ -32,10 +39,30 @@ public class BaseTest {
     }
 
     @AfterMethod
-    public void tearDown() {
+    public void tearDown(ITestResult result) {
+        if (result.getStatus() == ITestResult.FAILURE) {
+            System.out.println("Test failed " + result.getName());
+            String screenshotPath = "screenshots/" + result.getName() + ".png";
+            page.screenshot(
+                    new Page.ScreenshotOptions()
+                            .setPath(Paths.get(screenshotPath))
+                            .setFullPage(true)
+            );
 
-        if (context != null) {
-            context.close();
+            try {
+                InputStream inputStream = new FileInputStream(screenshotPath);
+                Allure.attachment(
+                        "Failure Screenshot",
+                        inputStream
+                );
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            if (context != null) {
+                context.close();
+            }
         }
     }
 

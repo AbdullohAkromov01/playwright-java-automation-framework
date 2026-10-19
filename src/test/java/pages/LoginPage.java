@@ -2,6 +2,7 @@ package pages;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import io.qameta.allure.Step;
 import utils.ConfigReader;
 
 public class LoginPage extends BasePage {
@@ -36,6 +37,7 @@ public class LoginPage extends BasePage {
         return getText(errorMessage);
     }
 
+    @Step("Login with username: {0}")
     public void login(String username, String password) {
         enterUsername(username);
         enterPassword(password);
