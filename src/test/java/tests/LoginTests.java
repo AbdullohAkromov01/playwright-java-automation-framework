@@ -17,7 +17,6 @@ public class LoginTests extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Owner("Abdulloh")
     public void successfulLoginTest() {
-        Allure.step("Opening login page");
 
         LoginPage loginPage = new LoginPage(page);
 

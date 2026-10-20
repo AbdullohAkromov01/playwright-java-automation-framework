@@ -5,10 +5,23 @@
 # Maven
 target/
 
-# Compiled class file
+# Allure
+allure-results/
+allure-report/
+
+# Screenshots generated during execution
+screenshots/
+
+# Playwright traces/videos (if added later)
+test-results/
+playwright-report/
+traces/
+videos/
+
+# Compiled class files
 *.class
 
-# Log file
+# Log files
 *.log
 
 # BlueJ files
@@ -17,7 +30,7 @@ target/
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
-# Package Files
+# Package files
 *.jar
 *.war
 *.nar

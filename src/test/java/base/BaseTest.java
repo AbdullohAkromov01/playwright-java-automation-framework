@@ -2,17 +2,17 @@ package base;
 
 import com.microsoft.playwright.*;
 import io.qameta.allure.Allure;
+import listeners.TestListener;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.*;
+import utils.PageManager;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.nio.file.Paths;
 
+@Listeners(TestListener.class)
 public class BaseTest {
 
     protected Playwright playwright;
@@ -36,34 +36,16 @@ public class BaseTest {
         context = browser.newContext();
 
         page = context.newPage();
+
+        PageManager.setPage(page);
     }
 
     @AfterMethod
-    public void tearDown(ITestResult result) {
-        if (result.getStatus() == ITestResult.FAILURE) {
-            System.out.println("Test failed " + result.getName());
-            String screenshotPath = "screenshots/" + result.getName() + ".png";
-            page.screenshot(
-                    new Page.ScreenshotOptions()
-                            .setPath(Paths.get(screenshotPath))
-                            .setFullPage(true)
-            );
-
-            try {
-                InputStream inputStream = new FileInputStream(screenshotPath);
-                Allure.attachment(
-                        "Failure Screenshot",
-                        inputStream
-                );
-
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-
+    public void tearDown() {
+            PageManager.removePage();
             if (context != null) {
                 context.close();
             }
-        }
     }
 
     @AfterClass

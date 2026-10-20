@@ -43,7 +43,7 @@ public class LoginPage extends BasePage {
         enterPassword(password);
         clickLogin();
     }
-
+    @Step("Open login page")
     public void open() {
         page.navigate(ConfigReader.getProperty("base.url"));
     }
