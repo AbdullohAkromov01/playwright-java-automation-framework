@@ -3,6 +3,7 @@ package base;
 import com.microsoft.playwright.*;
 import listeners.TestListener;
 import org.testng.annotations.*;
+import utils.ConfigReader;
 import utils.PageManager;
 
 @Listeners(TestListener.class)
@@ -19,7 +20,7 @@ public class BaseTest {
         playwright = Playwright.create();
 
         String browserName =
-                System.getProperty("browser", "chromium");
+                ConfigReader.getProperty("browser");
 
         switch (browserName.toLowerCase()) {
 
