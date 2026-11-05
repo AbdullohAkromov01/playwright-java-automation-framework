@@ -25,6 +25,10 @@ public class CartPage extends BasePage {
         click(removeBackpackButton);
     }
 
+    public boolean isBackpackVisible() {
+        return backpackItem.isVisible();
+    }
+
     public void proceedToCheckout() {
         click(checkoutButton);
     }

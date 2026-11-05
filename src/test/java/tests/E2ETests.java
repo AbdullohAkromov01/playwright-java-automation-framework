@@ -57,4 +57,36 @@ public class E2ETests extends BaseTest {
                 "Thank you for your order!"
         );
     }
+
+    @Test
+    public void removeProductFromCartTest() {
+
+        LoginPage loginPage = new LoginPage(page);
+
+        loginPage.open();
+
+        loginPage.login(
+                ConfigReader.getProperty("standard.username"),
+                ConfigReader.getProperty("password")
+        );
+
+        ProductsPage productsPage = new ProductsPage(page);
+
+        productsPage.addBackpackToCart();
+        productsPage.openCart();
+
+        CartPage cartPage = new CartPage(page);
+
+        Assert.assertEquals(
+                cartPage.getProductName(),
+                "Sauce Labs Backpack"
+        );
+
+        cartPage.removeBackpack();
+
+        Assert.assertFalse(
+                cartPage.isBackpackVisible(),
+                "Product should be removed from the cart"
+        );
+    }
 }

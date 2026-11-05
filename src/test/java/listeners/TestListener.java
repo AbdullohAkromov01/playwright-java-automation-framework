@@ -30,12 +30,12 @@ public class TestListener implements ITestListener {
                         .setFullPage(true)
         );
 
-        try (InputStream is =
+        try (InputStream inputStream =
                      new FileInputStream(screenshotPath)) {
 
             Allure.attachment(
                     "Failure Screenshot",
-                    is
+                    inputStream
             );
 
         } catch (Exception e) {

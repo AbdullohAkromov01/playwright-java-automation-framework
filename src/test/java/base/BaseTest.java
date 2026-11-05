@@ -1,16 +1,9 @@
 package base;
 
 import com.microsoft.playwright.*;
-import io.qameta.allure.Allure;
 import listeners.TestListener;
-import org.testng.ITestResult;
 import org.testng.annotations.*;
 import utils.PageManager;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.nio.file.Paths;
 
 @Listeners(TestListener.class)
 public class BaseTest {
@@ -42,10 +35,10 @@ public class BaseTest {
 
     @AfterMethod
     public void tearDown() {
-            PageManager.removePage();
-            if (context != null) {
-                context.close();
-            }
+        PageManager.removePage();
+        if (context != null) {
+            context.close();
+        }
     }
 
     @AfterClass
