@@ -21,6 +21,15 @@ public class ConfigReader {
     }
 
     public static String getProperty(String key) {
-        return properties.getProperty(key);
+
+        String systemPropertyKey = switch (key) {
+            case "base.url" -> "baseUrl";
+            default -> key;
+        };
+
+        return System.getProperty(
+                systemPropertyKey,
+                properties.getProperty(key)
+        );
     }
 }
