@@ -18,8 +18,25 @@ public class BaseTest {
 
         playwright = Playwright.create();
 
-        browser = playwright.chromium()
-                .launch(new BrowserType.LaunchOptions());
+        String browserName =
+                System.getProperty("browser", "chromium");
+
+        switch (browserName.toLowerCase()) {
+
+            case "firefox":
+                browser = playwright.firefox()
+                        .launch(new BrowserType.LaunchOptions());
+                break;
+
+            case "webkit":
+                browser = playwright.webkit()
+                        .launch(new BrowserType.LaunchOptions());
+                break;
+
+            default:
+                browser = playwright.chromium()
+                        .launch(new BrowserType.LaunchOptions());
+        }
     }
 
     @BeforeMethod
