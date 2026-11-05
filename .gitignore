@@ -1,7 +1,27 @@
-# Compiled class file
+# IntelliJ
+.idea/
+*.iml
+
+# Maven
+target/
+
+# Allure
+allure-results/
+allure-report/
+
+# Screenshots generated during execution
+screenshots/
+
+# Playwright traces/videos (if added later)
+test-results/
+playwright-report/
+traces/
+videos/
+
+# Compiled class files
 *.class
 
-# Log file
+# Log files
 *.log
 
 # BlueJ files
@@ -10,7 +30,7 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
-# Package Files #
+# Package files
 *.jar
 *.war
 *.nar
@@ -19,6 +39,10 @@
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+# JVM crash logs
 hs_err_pid*
 replay_pid*
+
+# OS files
+.DS_Store
+Thumbs.db
